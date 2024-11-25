@@ -1,5 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
+import Header from "./components/Header";
+import CardLines from "./components/cardLineComponent";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,29 +16,13 @@ const geistMono = localFont({
 
 export default function Home() {
   return (
-    <div>
-      <div className="bg-slate-100 h-16 flex items-center px-10">
-        {/* Left Section: Logo */}
-        <div className="flex-shrink-0">
-          <p className="text-lg font-bold">codePlatform</p>
-        </div>
-
-        {/* Middle Section: Navigation Links */}
-        <div className="hidden md:flex space-x-8 font-medium">
-          <p className="cursor-pointer hover:text-blue-600">Questions</p>
-          <p className="cursor-pointer hover:text-blue-600">About</p>
-          <p className="cursor-pointer hover:text-blue-600">kdsaodsa</p>
-        </div>
-
-        {/* Right Section: Buttons */}
-        <div className="flex space-x-4">
-          <button className="text-blue-800 font-medium hover:underline">Log In</button>
-          <button className="bg-blue-600 text-white font-medium px-4 py-2 rounded-md hover:bg-blue-700">
-            Sign Up
-          </button>
-        </div>
+    <div className=" w-full">
+      <Header />
+      <div className="justify-center items-center text-2xl mx-4 md:mx-20 my-20">
+        <div>Start getting better at Algorithms today!</div>
       </div>
-    </div>
+      <CardLines/>
+      </div>
   );
 }
 
@@ -139,3 +125,23 @@ export default function Home() {
         </a>
       </footer>
     </div> */
+
+//second
+/* <div className="bg-slate-100 h-16 flex items-center px-10">
+        <div className="flex-shrink-0">
+          <p className="text-lg font-bold">codePlatform</p>
+        </div>
+
+        <div className="hidden md:flex space-x-8 font-medium ml-20">
+          <p className="cursor-pointer hover:text-slate-400">Questions</p>
+          <p className="cursor-pointer hover:text-slate-400">About</p>
+          <p className="cursor-pointer hover:text-slate-400">kdsaodsa</p>
+        </div>
+
+        <div className="flex space-x-4 text-right">
+          <button className="font-medium hover:underline">Log In</button>
+          <button className="bg-blue-600 text-white font-medium px-4 py-2 rounded-md hover:bg-blue-700">
+            Sign Up
+          </button>
+        </div>
+      </div> */
