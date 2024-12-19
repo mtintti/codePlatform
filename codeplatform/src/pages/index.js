@@ -2,6 +2,9 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import Header from "./components/Header";
 import CardLines from "./components/cardLineComponent";
+import Landing from "./components/Landing";
+import Slider from "./components/Slider";
+import Cards from "./components/Cards";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,15 +21,49 @@ export default function Home() {
   return (
     <div className=" w-full">
       <Header />
-      <div className="justify-center items-center text-2xl mx-4 md:mx-20 my-20">
-        <div>Start getting better at Algorithms today!</div>
-      </div>
-      <CardLines/>
-      </div>
+      <Landing />
+      <Slider/>
+      <Cards/>
+    </div>
   );
 }
+/* <div className="grid md:grid-cols-3 gap-3 justify-center text-center">
+        <div className="my-11 space-y-8">
+        <div className="bg-zinc-200 rounded-md py-8 px-8">
+          <div className="text-xl md:text-3xl">
+            <p>HJASDISASD  AISDSA HD JASDIA</p>
+          </div>
+          <div className="mx-4 my-4">
+            <p>aksdoskad aoksdakd kasdoa</p>
+          </div>
+        </div>
+        <div className="bg-zinc-200 rounded-md py-8 px-8 grid-cols-2">
+          <div className="text-xl md:text-3xl">
+            <p>HJASDISASD  AISDSA HD JASDIA</p>
+          </div>
+          <div className="mx-4 my-4">
+            <p>aksdoskad aoksdakd kasdoa</p>
+          </div>
+
+        </div><div className="bg-zinc-200 rounded-md py-8 px-8 grid-col-3">
+          <div className="text-xl md:text-3xl">
+            <p>HJASDISASD  AISDSA HD JASDIA</p>
+          </div>
+          <div className="mx-4 my-4">
+            <p>aksdoskad aoksdakd kasdoa</p>
+          </div>
+        </div>
+        </div>
+      </div> */
+
 
 // start code
+
+// <img src="https://unsplash.it/700/600" />
+
+/* <div className="flex justify-center items-center text-2xl mx-4 md:mx-20 my-20">
+        <div className="flex ">Start getting better at Algorithms today!</div>
+      </div> */
 
 /* <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
