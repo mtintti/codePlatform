@@ -5,11 +5,12 @@ import Header from "../components/Header";
 import { Poppins, } from "next/font/google";
 import CodeEditor from "../components/CodeEditor";
 import Output from "../components/Output";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { execute } from "../api/api_Piston";
 import QuestionsComponent from "../components/QuestionsComponent";
 import DiscussionComponent from "../components/DiscussionComponent";
 import SolutionsComponent from "../components/SolutionsComponent";
+import { useQuestions } from "@/context/Context";
 
 const poppins = Poppins({
     weight: ['400', '700'],
@@ -19,19 +20,61 @@ const poppins = Poppins({
 
 export default function QuestionPage() {
     const router = useRouter();
-    const { title } = router.query;
+    //const { title } = router.query;
+
+    //const { questions, topics } = useQuestions();
     const eRef = useRef(null);
     const [output, setOutput] = useState("");
     const [visibleDis, SetVisibleDis] = useState(false);
     const [visibleQuest, setVisibleQuest] = useState(true);
     const [visibleSol, setVisibleSol] = useState(false);
     const [lang, setLang] = useState("java");
+    const { selected } = useQuestions();
+    const [codeData, setCodeData] = useState([]);
+
+
+    useEffect(() => {
+        if (selected) {
+            getCodes(selected.question_id);
+            console.log("Selected id is ", selected.question_id);
+        }
+    }, [selected]);
+    if (lang) {
+        console.log("Lang is , ", lang);
+    }
+
+
+    const getCodes = async (question_id) => {
+        try {
+            // Replace with your API call or data fetching logic
+            const response = await fetch(`/api/codeSnippets/${question_id}`);
+            const data = await response.json();
+            console.log("data title.js: ", data);
+            setCodeData(data); // Assuming the API returns { code: "..." 
+
+        } catch (error) {
+            console.error("Failed to fetch code:", error);
+        }
+    };
+
+    /*const current = codeData.find(snippet => snippet.language.toLowerCase() === lang.toLowerCase());
+    const currentCode = current ? current.code :  "// Code snippet not found for the selected language.";*/
+
+    const current = Array.isArray(codeData)
+        ? codeData.find(snippet => snippet.language.toLowerCase() === lang.toLowerCase())
+        : null;
+    const currentCode = current ? current.code : "// Code snippet not found for the selected language.";
+    console.log("Current code is, ", currentCode);
+    console.log("Current codeData is, ", codeData);
+    console.log("Lang in questionpage.js ",lang);
+
 
 
     const runCode = async () => {
         const source = eRef.current.getValue();
         if (!source) {
             setOutput("No code provided.");
+            console.log("source from, runCode ", source);
             return;
         }
 
@@ -50,24 +93,43 @@ export default function QuestionPage() {
         SetVisibleDis(true);
         setVisibleQuest(false);
         setVisibleSol(false);
-        console.log("Dis pressed!, ","Dis: ", visibleDis,"Quest: ", visibleQuest,"Sol: ", visibleSol);
+        console.log("Dis pressed!, ", "Dis: ", visibleDis, "Quest: ", visibleQuest, "Sol: ", visibleSol);
     };
 
     const toggleQuest = () => {
         SetVisibleDis(false);
         setVisibleQuest(true);
         setVisibleSol(false);
-        console.log("Quest pressed!, ","Dis: ", visibleDis,"Quest: ", visibleQuest,"Sol: ", visibleSol);
+        console.log("Quest pressed!, ", "Dis: ", visibleDis, "Quest: ", visibleQuest, "Sol: ", visibleSol);
     };
     const toggleSol = () => {
         SetVisibleDis(false);
         setVisibleQuest(false);
         setVisibleSol(true);
-        console.log("Sol pressed!, ","Dis: ", visibleDis,"Quest: ", visibleQuest,"Sol: ", visibleSol);
+        console.log("Sol pressed!, ", "Dis: ", visibleDis, "Quest: ", visibleQuest, "Sol: ", visibleSol);
     };
 
-
-
+    /*
+        const codesfromId = async () => {
+           try {
+               const response = await fetch(`/api/codeSnippets/${id}`);
+               const d = await response.json();
+               setCodes(d);
+               console.log("codes from QuestionComp, ", codes);
+    
+           } catch (error){
+               console.error("codes from Contex failed:", error);
+           }
+       }
+    
+       useEffect(() => {
+        if(selectedQ){
+            setQuestionDetails(selectedQ);
+            codesfromId(selectedQ.id);
+        }
+       }, [selectedQ]);
+    
+    */
     // auto_auto
 
     return (
@@ -82,7 +144,7 @@ export default function QuestionPage() {
                     </div>
                     <div>
                         <button onClick={toggleDis}>
-                            <p  className="hover:underline">Discussion</p>
+                            <p className="hover:underline">Discussion</p>
                         </button>
                     </div>
                     <div>
@@ -93,21 +155,45 @@ export default function QuestionPage() {
                 </div>
                 <div></div>
                 <div>
-                    {/* our question layout goes here*/}
-                    <div className="grid pt-8 px-4 rounded-md bg-slate-200">
-                    {visibleQuest && <QuestionsComponent/>}
-                    {visibleDis && <DiscussionComponent/>}
-                    {visibleSol && <SolutionsComponent/>}
-                </div>
+                    <div className="grid pt-8 mb-2 px-4 rounded-md bg-slate-200">
+                        {visibleQuest && <QuestionsComponent />}
+                        {visibleDis && <DiscussionComponent />}
+                        {visibleSol && <SolutionsComponent />}
+                    </div>
                 </div>
                 <div className="grid-rows-[,_50%] pt-2 md:pt-0 lg:px-2 lg:pr-6">
-                    <div className="bg-slate-200 rounded-md"><CodeEditor eRef={eRef} runCodeOn={runCode} lang={lang} setLang={setLang} /></div>
+                    <div className="bg-slate-200 rounded-md"><CodeEditor eRef={eRef} codeData={currentCode} runCodeOn={runCode} lang={lang} setLang={setLang} /></div>
                     <div className=" mt-2 bg-slate-200 rounded-md "><Output output={output} eRef={eRef} lang={lang} /></div>
                 </div>
             </div>
         </div>
     );
 }
+
+/*
+import { useQuestionContext } from "../../context/Context";
+
+const QuestionDetails = ({ questionId }) => {
+    const { questions, codeSnippets } = useQuestionContext();
+
+    const question = questions.find((q) => q.id === questionId);
+    const snippets = codeSnippets[questionId];
+
+    return (
+        <div>
+            <h1>{question?.title}</h1>
+            <p>{question?.description}</p>
+            <h3>Code Snippets:</h3>
+            <pre>{snippets ? JSON.stringify(snippets, null, 2) : "No snippets available"}</pre>
+        </div>
+    );
+};
+
+export default QuestionDetails;
+
+*/
+
+
 
 /* <div className="flex flex-row">
                     <div className="basis-1/2 bg-orange-400 text-center text-slate-200">
