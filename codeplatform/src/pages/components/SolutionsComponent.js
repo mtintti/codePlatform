@@ -40,7 +40,6 @@ export default function SolutionsComponent() {
                     ))}
                 </div>
                 <div className="rounded-md bg-white py-2 px-2 text-left">
-                    
                 </div>
             </div>
         </div>
