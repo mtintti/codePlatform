@@ -5,12 +5,16 @@ import CardLines from "./components/cardLineComponent";
 import Landing from "./components/Landing";
 import Slider from "./components/Slider";
 import Cards from "./components/Cards";
+import { useSession } from "next-auth/react";
+import Statements from "./components/Statements";
+import Footer from "./components/footer";
+import TextStatement from "./components/Text";
 
-const geistSans = localFont({
+/*const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
-});
+});*/
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -18,15 +22,26 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+ /* const {data: session, status} = useSession();
+    console.log("Curr session", session);
+      if(status === "authenticated"){
+        console.log("session.user from app",session.user.name);
+      }
+      console.log("session.guest from app",session);*/
   return (
     <div className=" w-full">
       <Header />
       <Landing />
       <Slider/>
-      <Cards/>
+      <Statements/>
+      <TextStatement/>
+      <Footer/>
     </div>
   );
 }
+
+// <Cards/>
+
 /* <div className="grid md:grid-cols-3 gap-3 justify-center text-center">
         <div className="my-11 space-y-8">
         <div className="bg-zinc-200 rounded-md py-8 px-8">

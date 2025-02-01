@@ -741,8 +741,8 @@ export default function Questions() {
     return (
         <>
             <Header />
-            <div className="justify-center mt-8 md:mt-0 items-center grid md:grid-cols[1fr,18rem] md:gap-8 md:[&>aside]:order-1 min-h-[calc(100vh-28rem)] mb-4">
-                <div className="mt-8 md:sticky md:top-16 md:h-fit md:self-start">
+            <div className="justify-center items-center grid md:grid-cols[1fr,18rem] md:gap-8 md:[&>aside]:order-1 min-h-[calc(100vh-28rem)] mb-4">
+                <div className="mt-20 md:sticky md:top-16 md:h-fit md:self-start"> {/* mt-8 / replaced from mt-20 md:mt-0  */}
                     <p className="mt-6 md:mt-12 text-lg text pl-2">Choose topics</p>
                     <div className="mt-6 pl-2 flex flex-wrap justify-start pb-4 border-b-2 items-baseline gap-2 text-sm text-gray-600">
                         {topics.map((type, index) => (
@@ -799,39 +799,42 @@ export default function Questions() {
 
                     <div className="grid grid-cols-1 gap-6 mt-8">
                         {(filtered.length > 0 ?
-                        ( <>
-                            {filtered.map((question, index) => (
-                                //filtered.length < 0 ? (
-                                <button
-                                    key={index}
-                                    onClick={() => onClickselected(question)}
-                                    className="text-left block p-4 shadow-md bg-white dark:bg-neutral-800"
-                                >
-                                    <div className="flex items-center space-x-2">
-                                        <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                                            {question.title}
-                                        </h3>
-                                        <div className="w-[1px] bg-neutral-600 h-[40px] sm:h-[18px]"></div>
-                                        <div className="inline-block font-light text-sm text-gray-700 dark:text-neutral-500">
-                                            {question.difficulty}
+                            (<>
+                                {filtered.map((question, index) => (
+                                    //filtered.length < 0 ? (
+                                    <button
+                                        key={index}
+                                        onClick={() => onClickselected(question)}
+                                        className="text-left block p-4 shadow-md bg-neutral-50"
+                                    >
+                                        <div className="flex items-center space-x-2">
+                                            <h3 className="text-lg font-bold text-gray-800">
+                                                {question.title}
+                                            </h3>
+                                            <div className="w-[1px] bg-neutral-600 h-[40px] sm:h-[18px]"></div>
+                                            <div className="inline-block font-light text-sm text-gray-700">
+                                                {question.difficulty}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                                        {question.description}
-                                    </p>
-                                    <div className="space-x-2 pt-3">
-                                        <div className="inline-block rounded-md px-1.5 py-0.5 font-light text-sm bg-gray-100 text-gray-700">
-                                            {question.type}
+                                        <p className="text-sm text-gray-600 mt-2">
+                                            {question.description}
+                                        </p>
+                                        <div className="space-x-2 pt-3">
+                                            <div className="inline-block rounded-md px-1.5 py-0.5 font-light text-sm bg-gray-100 text-gray-700">
+                                                {question.type}
+                                            </div>
                                         </div>
-                                    </div>
-                                </button>
-                            ))}
+                                    </button>
+                                ))}
                             </>
-                        )
-                            : (<div className="justify-center items-center">
-                                <p className="font-bold">Use different terms, no questions found.</p>
-                            </div>))}
-                        
+                            )
+                            : (
+                                <div className="grid grid-cols-1 w-full min-w-6xl gap-6 mt-8">
+                                    <div className="justify-center text-center items-center">
+                                        <p className="font-bold">Use different terms, no questions found. 😞</p>
+                                    </div>
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>
