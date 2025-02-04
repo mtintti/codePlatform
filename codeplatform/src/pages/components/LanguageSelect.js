@@ -12,24 +12,6 @@ const LanguageSelect = ({lang, onSelect}) => {
     }
 
     return (
-        /*<div>
-            <p className='font-lg mb-2'>Language:</p>
-            <div className='relative inline-block'>
-                <button className='bg-gray-100 rounded-md px-4 py-2 text-gray-700 hover:bg-gray-200'
-                onClick={toggle}>
-                    Java
-                </button>
-                <div className={`${ open ? "block" : "hidden" } hidden absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg`}>
-                    <div className='py-1'>
-                        {lang.map(([lang, vers]) => (
-                            <span className=' px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg'
-                                key={lang}>{lang}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>*/
 
         <div>
             <div className="relative inline-block">
@@ -51,7 +33,6 @@ const LanguageSelect = ({lang, onSelect}) => {
                                 onClick={() => {onSelect(langs);
                                     setOpen(false);
                                 }}
-                                //className={`px-4 py-2 text-gray-700 font-semibold hover:bg-gray-100 cursor-pointer ${lang === langs ? CURR_COLOR + "bg-gray-900" : "text"}
                                 className={`px-4 py-2 font-medium cursor-pointer 
                                     ${lang === langs ? CURR_COLOR + " bg-slate-300 text-white" : "text-gray-700"}
                                    hover:bg-slate-100 hover:text-blue-400`}

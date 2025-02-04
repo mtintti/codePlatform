@@ -1,19 +1,13 @@
-import { signIn, useSession } from "next-auth/react";
+//import { signIn, useSession } from "next-auth/react";
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react"
 
 export default function Register({ switchLogin }) {
     const [username,setUsername] = useState("");
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
-    const {data: session, status} = useSession();
-    //console.log("Curr session", session);
-    function signedin(){
-      if(status === "authenticated"){
-        console.log("session.user from app",session.user.name);
-      }
-      console.log("session.guest from app",session);
-    }
+    const { setIsLoggedIn} = useAuth()
+   
 
     const handleSignup = async () => {
         try {
@@ -21,11 +15,11 @@ export default function Register({ switchLogin }) {
                 method: 'POST',
                 body: JSON.stringify({ username, email, password }),
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
             });
             if (res.ok) {
+                setIsLoggedIn(true);
                 console.log("signin success");
-                signedin();
-
             }
         } catch (error) {
             console.error('Error signing up:', error);

@@ -1,25 +1,7 @@
-/*import database from "../database";
 
-export default async function handler(req, res){
-    const {username, email, password} = req.body;
-    try{
-        const db = await database;
-
-       /* const existing = await db.collection('users').findOne({username, email});
-        if(existing){
-            return res.status(400).json({message: 'user is aready in database'});
-        } //
-
-        await db.collection('users').insertOne({username, email, password});
-        return res.status(201).json({message: 'user created'});
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
-    }
-}
-    */
-const { query } = require('../database'); // Adjust the path as needed
+const { query } = require('../database');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -32,14 +14,20 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'All fields are required.' });
     }
 
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    if(!passwordRegex.test(password)){
+        return res.status(401).json({error: "Use a stronger password"});
+    }
+
     try {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         const existingUser = await query('SELECT * FROM users WHERE email = $1', [email]);
         if (existingUser.rows.length > 0) {
             return res.status(409).json({ error: 'Email already registered.' });
         }
 
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const result = await query(
             `INSERT INTO users (username, email, password) 
@@ -49,8 +37,12 @@ export default async function handler(req, res) {
 
         const newUser = result.rows[0];
 
+        const token = jwt.sign({ user_id: newUser.user_id, username: newUser.username }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+        res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Path=/; Secure; SameSite=Strict`);
+
         res.status(201).json({
-            message: 'User registered successfully.',
+            message: 'User registered!',
             user: {
                 user_id: newUser.user_id,
                 username: newUser.username,
@@ -58,7 +50,7 @@ export default async function handler(req, res) {
             },
         });
     } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ error: 'Internal Server Error.' });
+        console.error('Error while registering user:', error);
+        res.status(500).json({ error: 'server Error.' });
     }
 };

@@ -20,9 +20,6 @@ const poppins = Poppins({
 
 export default function QuestionPage() {
     const router = useRouter();
-    //const { title } = router.query;
-
-    //const { questions, topics } = useQuestions();
     const eRef = useRef(null);
     const [output, setOutput] = useState("");
     const [visibleDis, SetVisibleDis] = useState(false);
@@ -46,19 +43,16 @@ export default function QuestionPage() {
 
     const getCodes = async (question_id) => {
         try {
-            // Replace with your API call or data fetching logic
             const response = await fetch(`/api/codeSnippets/${question_id}`);
             const data = await response.json();
             console.log("data title.js: ", data);
-            setCodeData(data); // Assuming the API returns { code: "..." 
+            setCodeData(data);
 
         } catch (error) {
             console.error("Failed to fetch code:", error);
         }
     };
 
-    /*const current = codeData.find(snippet => snippet.language.toLowerCase() === lang.toLowerCase());
-    const currentCode = current ? current.code :  "// Code snippet not found for the selected language.";*/
 
     const current = Array.isArray(codeData)
         ? codeData.find(snippet => snippet.language.toLowerCase() === lang.toLowerCase())
@@ -66,7 +60,7 @@ export default function QuestionPage() {
     const currentCode = current ? current.code : "// Code snippet not found for the selected language.";
     console.log("Current code is, ", currentCode);
     console.log("Current codeData is, ", codeData);
-    console.log("Lang in questionpage.js ",lang);
+    console.log("Lang in questionpage.js ", lang);
 
 
 
@@ -109,33 +103,10 @@ export default function QuestionPage() {
         console.log("Sol pressed!, ", "Dis: ", visibleDis, "Quest: ", visibleQuest, "Sol: ", visibleSol);
     };
 
-    /*
-        const codesfromId = async () => {
-           try {
-               const response = await fetch(`/api/codeSnippets/${id}`);
-               const d = await response.json();
-               setCodes(d);
-               console.log("codes from QuestionComp, ", codes);
-    
-           } catch (error){
-               console.error("codes from Contex failed:", error);
-           }
-       }
-    
-       useEffect(() => {
-        if(selectedQ){
-            setQuestionDetails(selectedQ);
-            codesfromId(selectedQ.id);
-        }
-       }, [selectedQ]);
-    
-    */
-    // auto_auto
-
     return (
-        <div className="pt-24">
+        <div>
             <Header />
-            <div className="grid-cols-1 grid-rows-[auto_auto] lg:grid grid-cols-[600px,_1fr] bg-slate-100 px-2 py-2">
+            <div className="pt-24 grid-cols-1 grid-rows-[auto_auto] lg:grid grid-cols-[600px,_1fr] bg-slate-100 px-2 py-2">
                 <div className="flex space-x-2 ml-2 mb-1 space-x-4 font-extralight">
                     <div>
                         <button onClick={toggleQuest}>
@@ -169,62 +140,3 @@ export default function QuestionPage() {
         </div>
     );
 }
-
-/*
-import { useQuestionContext } from "../../context/Context";
-
-const QuestionDetails = ({ questionId }) => {
-    const { questions, codeSnippets } = useQuestionContext();
-
-    const question = questions.find((q) => q.id === questionId);
-    const snippets = codeSnippets[questionId];
-
-    return (
-        <div>
-            <h1>{question?.title}</h1>
-            <p>{question?.description}</p>
-            <h3>Code Snippets:</h3>
-            <pre>{snippets ? JSON.stringify(snippets, null, 2) : "No snippets available"}</pre>
-        </div>
-    );
-};
-
-export default QuestionDetails;
-
-*/
-
-
-
-/* <div className="flex flex-row">
-                    <div className="basis-1/2 bg-orange-400 text-center text-slate-200">
-                        <p className="justify-center items-center">1</p>
-                    </div>
-                    <div className="flex-col">
-                        <div className="basis-1/3 bg-green-600 text-center text-slate-200">2</div>
-                        <div className="basis-1/3 bg-gray-400 text-center text-slate-200">3</div>
-                    </div>
-                </div> */
-
-
-/* <div className="grid pt-8 px-4 rounded-md bg-slate-200">
-                    <div className="text-2xl">
-                        <h2>{title}</h2>
-                        <div className="mt-3 h-px bg-neutral-500 h-[18px]"></div>
-                        <div className=" text-base my-4">
-                            <p> Given a string s which consists of lowercase or uppercase letters, return the length of the longest
-                                palindrome
-                                that can be built with those letters.</p>
-                            <p>Letters are case sensitive, for example, "Aa" is not considered a palindrome.</p>
-                            <div className="pl-3 mt-8 text-base font-semi  space-x-4">
-                                Example:
-                                <div className="pl-2 text-base font-light">Input: s = "abccccdd"
-                                    Output: 7</div>
-                                <div className=" mt-4 text-base font-semi">
-                                    Example:
-                                    <div className="pl-2 text-base font-light">Input: s = "a"
-                                        Output: 1</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */
