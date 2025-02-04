@@ -1,6 +1,4 @@
 import { useQuestions } from "@/context/Context";
-import { useState } from "react";
-
 
 export default function QuestionsComponent() {
     const {selected} = useQuestions();

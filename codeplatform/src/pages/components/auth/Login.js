@@ -1,18 +1,13 @@
+import { useAuth } from "@/context/AuthContext";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 
-export default function Login({switchSignin}) {
+export default function Login({switchSignin, SetIsSignedIn}) {
     const [username, setUsername] = useState("");
-    //const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    function loggedIn(){
-        if(status === "authenticated"){
-          console.log("session.user from app",session.user.name);
-        }
-        console.log("session.guest from app",session);
-    }
+    const { setIsLoggedIn} = useAuth()
+        console.log("SetIsSignedIn in Login comp", SetIsSignedIn);
 
     const loginHandle = async () => {
         try{
@@ -20,13 +15,15 @@ export default function Login({switchSignin}) {
                 method: 'POST',
                 body: JSON.stringify({username, password}),
                 headers: {'Content-Type' : 'application/json'},
+                credentials: 'include',
             });
             if(res.ok){
-                console.log("login success")
-                loggedIn();
+                setIsLoggedIn(true);
+                console.log("login success");
+
             }
         } catch (error){
-            console.log("Error logging in, ",error);
+            console.log(error);
         }
     };
 
@@ -40,10 +37,6 @@ export default function Login({switchSignin}) {
                     <input onChange={(e) => (setUsername(e.target.value))} className="w-full p-2 border-none outline-none bg-transparent" placeholder="username">
                     </input>
                 </div>
-                {/*<div className="rounded-md bg-gray-200">
-                    <input onChange={(e) => (setEmail(e.target.value))} className="w-full p-2 border-none outline-none bg-transparent" placeholder="email">
-                    </input>
-                </div>*/}
                 <div className="rounded-md bg-gray-200">
                     <input onChange={(e) => (setPassword(e.target.value))} className="w-full p-2 border-none outline-none bg-transparent" placeholder="password" type="password">
                     </input>

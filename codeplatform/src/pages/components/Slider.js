@@ -10,10 +10,6 @@ const poppins = Poppins({
 });
 
 export default function Slider() {
-    /*const items = ["Arrays", "Sorting", "Graphs", "Dynamic", "Greedy"];
-    const itemsRight = ["Backtracking", "Recursion", "Hashing", "Trees"];
-    const itemsLast = ["String", "Mathematics", "Bit", "Search", "Graph"];*/
-
     const items = ["Arrays", "Sorting", "Graphs", "Dynamic", "Greedy"];
     const itemsRight = ["Backtracking", "Recursion", "Hashing", "Trees"];
     const itemsLast = ["String", "Mathematics", "Bit", "Search", "Graph"];
@@ -37,42 +33,9 @@ export default function Slider() {
         bymove += dirFactor.current * bymove * (velocityF.get() * 0.7);
         baseX.set(baseX.get() + bymove);
     });
-    // maskImage: "linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)",
-    // WebkitMaskImage: "linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)",
 
-    /*
     const renderSlider = (items, reverse) => (
         <div className="w-full overflow-hidden">
-            <div
-                className=""
-                style={{
-                    "--height": "50px",
-                    
-                }}
-            >
-                <motion.div
-                    className="flex w-full"
-                    style={{
-                        x,
-                    }}
-                >
-                    {[...items, ...items].map((item, index) => (
-                        <div
-                            key={index}
-                            className="px-4 text-center justify-center md:text-2xl text-1xl whitespace-nowrap"
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
-        </div>
-    );*/
-
-
-    // new
-    const renderSlider = (items, reverse) => (
-        <div className="w-full overflow-hidden"> {/* Matches .parallax */}
             <div
                 className="overflow-hidden tracking-[-2px] leading-[0.8] m-0 whitespace-nowrap flex flex-nowrap"
                 style={{
@@ -100,108 +63,6 @@ export default function Slider() {
 
 
     return (
-
-
-        /*<div className={`${poppins.className} flex flex-col justify-center items-center space-y-2 pt-8`}>
-            <div
-                className="max-w-4xl pt-4 group h-[var(--height)] overflow-hidden"
-                style={{
-                    '--height': '50px',
-                    '--quantity': items.length,
-                    maskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                }}
-            >
-                <div
-                    className="flex w-full relative animate-autoRun"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}
-                >
-                    {items.map((item, index) => (
-                        <div
-                            key={index}
-                            className="lg:px-8 overflow-hidden text-center md:text-2xl text-1xl group-hover:animation-play-state-paused"
-                            style={{
-                                width: 'fit-content',
-                                height: 'var(--height)',
-                                marginRight: '30px',
-                                animationDelay: `calc((10s / var(--quantity)) * ${index})`,
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div
-                className="max-w-4xl group h-[var(--height)] overflow-hidden"
-                style={{
-                    '--height': '50px',
-                    '--quantity': items.length,
-                    maskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                }}
-            >
-                <div
-                    className="flex w-full relative animate-autoRunRight"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}
-                >
-                    {itemsRight.map((item, index) => (
-                        <div
-                            key={index}
-                            className="lg:px-8 overflow-hidden text-center md:text-2xl text-1xl group-hover:animation-play-state-paused"
-                            style={{
-                                width: 'fit-content',
-                                height: 'var(--height)',
-                                marginRight: '30px',
-                                animationDelay: `calc((10s / var(--quantity)) * ${index})`,
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div
-                className="max-w-4xl group h-[var(--height)] overflow-hidden"
-                style={{
-                    '--height': '50px',
-                    '--quantity': items.length,
-                    maskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 1), transparent)',
-                }}
-            >
-                <div
-                    className="flex w-full relative animate-autoRunLast"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}
-                >
-                    {itemsLast.map((item, index) => (
-                        <div
-                            key={index}
-                            className="lg:px-8 overflow-hidden text-center md:text-2xl text-1xl group-hover:animation-play-state-paused"
-                            style={{
-                                width: 'fit-content',
-                                height: 'var(--height)',
-                                marginRight: '30px',
-                                animationDelay: `calc((10s / var(--quantity)) * ${index})`,
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>*/
 
         <div className="flex flex-col justify-center items-center py-4 px-4">
             {renderSlider(items)}

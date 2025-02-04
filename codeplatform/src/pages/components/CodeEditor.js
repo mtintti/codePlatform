@@ -1,7 +1,6 @@
 import { Editor } from "@monaco-editor/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LanguageSelect from "./LanguageSelect";
-//import { CODE_SNIPPETS } from "../../../constraits";
 import RunButton from "./runButton";
 
 
@@ -16,19 +15,9 @@ export default function CodeEditor({ eRef, runCodeOn, lang, setLang, codeData })
   useEffect(() => {
     setVal(codeData || "");
   }, [codeData]);
-  /*const onSelect = (lang) => {
-    setLang(lang);
-    setVal(CODE_SNIPPETS[lang]);
-  }*/
-
-  /*const onChangeLang = (newlang) => {
-    onChangeLang(newlang);
-    setVal(CODE_SNIPPETS[newlang]);
-  }*/
 
   const onSelect = (selectedLang) => {
     setLang(selectedLang);
-    //setVal(CODE_SNIPPETS[selectedLang]);
     setVal(codeData);
     console.log("Curr Val in CodeEditor.js, ", val);
   };
@@ -41,7 +30,7 @@ export default function CodeEditor({ eRef, runCodeOn, lang, setLang, codeData })
         <LanguageSelect lang={lang} onSelect={onSelect} />
         <RunButton runCodeOn={runCodeOn} />
       </div>
-        <Editor height="50vh" language={lang}  // CODE_SNIPPETS[lang]
+        <Editor height="50vh" language={lang}
           onMount={onMount} value={val} onChange={(val) => setVal(val)}
           theme="light" />
     </div>

@@ -1,7 +1,6 @@
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoMdChatbubbles } from "react-icons/io";
-import { FaArrowTurnUp } from "react-icons/fa6";
 import { useState } from "react";
 import Searchbar from "./searchbar";
 
@@ -29,18 +28,18 @@ export default function DiscussionComponent() {
             <div>
                 <div className="flex space-x-4 items-center">
                     <div className="rounded-full items-center py-5 px-5 bg-green-200"></div>
-                    <div className="text-medium">Maija Mehiläinen</div>
+                    <div className="text-medium">User #1</div>
                 </div>
                 <div className="flex mt-4">
-                    <h1 className="text-sm">Tää on ihan huono kysymys, mää en osaa!! Yhyy</h1>
+                    <h1 className="text-sm">Tää on ihan huono kysymys!!</h1>
                 </div>
                 <div className="flex space-x-3 my-4 items-center">
                     <div className="hover:bg-green-200 hover:-translate-y-0.5"><MdKeyboardArrowUp /></div>
-                    <p className="text-sm">23</p>
+                    <p className="text-sm">2</p>
                     <div className="hover:bg-red-200 flex hover:translate-y-0.5"><MdKeyboardArrowDown /></div>
                     <div className="flex items-center space-x-1">
                         <IoMdChatbubbles />
-                        <div className="text-sm font-light" onClick={toggleComments}>Show 12 replies</div>
+                        <div className="text-sm font-light" onClick={toggleComments}>Show 3 replies</div>
                     </div>
                 </div>
 
@@ -50,10 +49,10 @@ export default function DiscussionComponent() {
                         <div className="mt-4">
                             <div className="flex space-x-4 items-center">
                                 <div className="rounded-full items-center py-5 px-5 bg-pink-200"></div>
-                                <div className="text-medium">Maija Mehiläinen #2</div>
+                                <div className="text-medium">User#2</div>
                             </div>
                             <div className="flex mt-4">
-                                <h1 className="text-sm">Maija Mehiläinen on ihan huono näissä, hahaha. Mää vien sun työt, Majia!</h1>
+                                <h1 className="text-sm">No joo</h1>
                             </div>
                             <div className="flex space-x-3 my-4 items-center">
                                 <div className="hover:bg-green-200 hover:-translate-y-0.5"><MdKeyboardArrowUp /></div>
@@ -61,7 +60,7 @@ export default function DiscussionComponent() {
                                 <div className="hover:bg-red-200 flex hover:translate-y-0.5"><MdKeyboardArrowDown /></div>
                                 <div className="flex items-center space-x-1">
                                     <IoMdChatbubbles />
-                                    <div className="text-sm font-light" onClick={toggleComments2}>Show 100 replies</div>
+                                    <div className="text-sm font-light" onClick={toggleComments2}>Show 1 replies</div>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +69,7 @@ export default function DiscussionComponent() {
                             <div className="mt-4 ml-8">
                                 <div className="flex space-x-4 items-center">
                                     <div className="rounded-full items-center py-5 px-5 bg-blue-200"></div>
-                                    <div className="text-medium">Another Commenter</div>
+                                    <div className="text-medium">Kolmas kommentoida</div>
                                 </div>
                                 <div className="flex mt-4">
                                     <h1 className="text-sm">I disagree! This is a fantastic question.</h1>
