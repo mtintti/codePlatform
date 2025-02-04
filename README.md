@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [🚀 About](#-about)
-- [🛠️ Tech Stack](#-stack)
+- [🛠️ Tech Stack](#-tech-stack)
 - [📝 How to Build](#-how-to-build)
 
 ---
@@ -11,21 +11,23 @@
 
 **CodePlatform** is a web application where users can practice common algorithm question in intuitive interface.  
 
-![Animation_Home](https://github.com/user-attachments/assets/2ed6c396-9628-4d31-852a-e9e69429ac29)
+  
+![Animation_Home2](https://github.com/user-attachments/assets/7375b7c5-3293-49d8-96c2-2cff1eb446b1)
 
-Websites frontpages look. 
+Websites frontpage look. 
 
 
-![Animation_Questions](https://github.com/user-attachments/assets/7031e984-3d42-49ba-afea-b08b0e47a6a1)
+![Animation_Questions](https://github.com/user-attachments/assets/83bad84a-a7e8-4000-b8e7-b0f89b3a04d6)
 
-Our code questions page and code ui.
+Login modal and code questions searchpage and code complier ui.
 
-![Animation_codeRunning](https://github.com/user-attachments/assets/069744a9-e118-4b86-a7e6-aeb14d4ad3de)
+  
+![Animation_code](https://github.com/user-attachments/assets/1863c8e9-59b9-45a6-b889-e588a14ce259)
 
 Our questions java code complied in code editor.
 
 ### Key Features
-- **Algo questions:**
+- **Algo questions:** Choose any question from our platform to solve.
 
 ---
 
